@@ -21,3 +21,4 @@ def ingest_data()-> pd.DataFrame:
     except Exception as e:
         logging.error(e)
         raise e
+ 
