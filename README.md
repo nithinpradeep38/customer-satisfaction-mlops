@@ -15,3 +15,23 @@ To start zenml locally
 zenml init
 zenml up
 ```
+To run deployment pipeline, also install integrations using zenml. We need to register the experiment tracker and model deployer components
+
+```
+zenml integration install mlflow -y
+zenml experiment-tracker register mlflow_tracker --flavor=mlflow
+zenml model-deployer register mlflow --flavor=mlflow
+zenml stack register mlflow_stack -a default -o default -d mlflow -e mlflow_tracker --set
+```
+
+If you see Connectionerror while registering experiment-tracker, try disconnecting zenml by running `zenml disconnect`.
+If the issue persists,try 
+`export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES` before running `zenml up`
+
+### Reviewing MLFlow experiment-tracker in UI
+After registering MLFlow, run the pipeline along with the following to track the backend store location
+
+`print(Client().active_stack.experiment_tracker.get_tracking_uri())`
+
+Run the below. The MLflow experiment tracker will be active in 5000 port.
+`mlflow ui --backend-store-uri "<enter backend store location>"`
