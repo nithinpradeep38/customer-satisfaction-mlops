@@ -26,6 +26,7 @@ zenml stack register mlflow_stack -a default -o default -d mlflow -e mlflow_trac
 
 If you see Connectionerror while registering experiment-tracker, try disconnecting zenml by running `zenml disconnect`.
 If the issue persists,try 
+
 `export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES` before running `zenml up`
 
 ### Reviewing MLFlow experiment-tracker in UI
@@ -33,5 +34,6 @@ After registering MLFlow, run the pipeline along with the following to track the
 
 `print(Client().active_stack.experiment_tracker.get_tracking_uri())`
 
-Run the below. The MLflow experiment tracker will be active in 5000 port.
+Run the below. The MLflow experiment tracker will be active in 5000 port. You can inspect your experiment runs within MLflow and compare different runs.
+
 `mlflow ui --backend-store-uri "<enter backend store location>"`
